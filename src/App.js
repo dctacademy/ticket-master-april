@@ -1,26 +1,38 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react' 
+import { BrowserRouter, Route, Link, Switch } from 'react-router-dom'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import CustomerList from './components/customers/List'
+import CustomerNew from './components/customers/New'
+import CustomerShow from './components/customers/Show'
+import CustomerEdit from './components/customers/Edit'
+
+import EmployeeList from './components/employees/List'
+import EmployeeNew from './components/employees/New'
+
+class App extends React.Component {
+    render() {
+        return (
+            <BrowserRouter>
+                <div>
+                    <h1>Ticket Master</h1>
+                    <ul>
+                        <li><Link to="/">Home</Link></li>
+                        <li><Link to="/customers">Customers</Link></li>
+                        <li><Link to="/employees">Employees</Link></li>
+                    </ul>
+
+                    <Switch>
+                        <Route path="/customers" component={CustomerList} exact={true} />
+                        <Route path="/customers/new" component={CustomerNew} exact={true} />
+                        <Route path='/customers/edit/:id' component={CustomerEdit} exact={true} />
+                        <Route path="/customers/:id" component={CustomerShow} />
+                        <Route path="/employees" component={EmployeeList} exact={true} />
+                        <Route path="/employees/new" component={EmployeeNew} />
+                    </Switch>
+                </div>
+            </BrowserRouter>
+        )
+    }
 }
 
-export default App;
+export default App
