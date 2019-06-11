@@ -3,11 +3,13 @@ import { Link } from 'react-router-dom'
 
 class CustomerForm extends React.Component {
     constructor(props) {
+        console.log('constructor', props)
+        console.log('form constructor')
         super(props)
         this.state = {
-            name: '',
-            email: '',
-            mobile: ''
+            name: props.isEdit ? props.customer.name : '',
+            email: props.isEdit ? props.customer.email : '',
+            mobile: props.isEdit ? props.customer.mobile : ''
         }
         this.handleNameChange = this.handleNameChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
@@ -43,6 +45,8 @@ class CustomerForm extends React.Component {
     }
 
     render() {
+        console.log('form render')
+        console.log('form state', this.state)
         return (
             <form onSubmit={this.handleSubmit}>
                 <label>
